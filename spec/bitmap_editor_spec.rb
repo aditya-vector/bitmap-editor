@@ -56,6 +56,24 @@ describe BitmapEditor do
       context 'with valid arguments' do
         let(:file) { File.new('./examples/color_vertical_segment_bitmap.txt') }
         subject { BitmapEditor.new.run(file) }
+        it 'sets the vertical segment with given color' do
+          expect{ subject }.to output(
+            <<~STREND
+              OOOO
+              OOOO
+              GOOO
+              GOOO
+              GOOO
+            STREND
+          ).to_stdout
+        end
+      end
+    end
+
+    describe 'Verify: C' do
+      context 'with valid arguments' do
+        let(:file) { File.new('./examples/clear_bitmap.txt') }
+        subject { BitmapEditor.new.run(file) }
         it 'clears the bitmap and sets default color to white (O)' do
           expect{ subject }.to output(
             <<~STREND
@@ -64,6 +82,24 @@ describe BitmapEditor do
               OOOO
               OOOO
               OOOO
+            STREND
+          ).to_stdout
+        end
+      end
+    end
+
+    describe 'Verify: H' do
+      context 'with valid arguments' do
+        let(:file) { File.new('./examples/color_horizontal_segment_bitmap.txt') }
+        subject { BitmapEditor.new.run(file) }
+        it 'sets the horizontal segment with given color' do
+          expect{ subject }.to output(
+            <<~STREND
+              OOOO
+              OOOO
+              OOOO
+              OOOO
+              ORRR
             STREND
           ).to_stdout
         end

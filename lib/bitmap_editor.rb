@@ -15,10 +15,18 @@ class BitmapEditor
         width = line[2].to_i
         @bitmap = Array.new(width) { Array.new(height, 'O')  }
       when 'L'
-        x = line[1].to_i - 1
-        y = line[2].to_i - 1
+        x = to_coordinate(line[1])
+        y = to_coordinate(line[2])
         color = line[3].to_s
-        @bitmap[y][x] = color
+        color_pixel(x, y, color)
+      when 'V'
+        x = to_coordinate(line[1])
+        upper_y = to_coordinate(line[2])
+        lower_y = to_coordinate(line[3])
+        color = line[4].to_s
+        (upper_y..lower_y).map{ |elem| color_pixel(x, elem, color) }
+      when 'C'
+        @bitmap.map { |elem| elem.fill('O') }
       when 'S'
         puts 'There is no image' if @bitmap.nil?
         puts @bitmap.map(&:join).join("\n")
@@ -26,5 +34,15 @@ class BitmapEditor
           puts 'unrecognised command :('
       end
     end
+  end
+
+  private
+
+  def to_coordinate(elem)
+    elem.to_i - 1
+  end
+
+  def color_pixel(x, y, color)
+    @bitmap[y][x] = color
   end
 end
