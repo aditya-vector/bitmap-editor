@@ -15,5 +15,59 @@ describe BitmapEditor do
         end
       end
     end
+
+    describe 'Verify command: I' do
+      context 'with valid arguments' do
+        let(:file) { File.new('./examples/generate_bitmap.txt') }
+        subject { BitmapEditor.new.run(file) }
+        it 'generates a bitmap with default color white (O)' do
+          expect{ subject }.to output(
+            <<~STREND
+              OOOO
+              OOOO
+              OOOO
+              OOOO
+              OOOO
+            STREND
+          ).to_stdout
+        end
+      end
+    end
+
+    describe 'Verify command: L' do
+      context 'with valid arguments' do
+        let(:file) { File.new('./examples/color_bitmap.txt') }
+        subject { BitmapEditor.new.run(file) }
+        it 'generates a bitmap with default color white (O)' do
+          expect{ subject }.to output(
+            <<~STREND
+              OOOO
+              OOOO
+              OYOO
+              OOOO
+              OOOO
+            STREND
+          ).to_stdout
+        end
+      end
+    end
+
+    describe 'Verify: V' do
+      context 'with valid arguments' do
+        let(:file) { File.new('./examples/color_vertical_segment_bitmap.txt') }
+        subject { BitmapEditor.new.run(file) }
+        it 'clears the bitmap and sets default color to white (O)' do
+          expect{ subject }.to output(
+            <<~STREND
+              OOOO
+              OOOO
+              OOOO
+              OOOO
+              OOOO
+            STREND
+          ).to_stdout
+        end
+      end
+    end
   end
 end
