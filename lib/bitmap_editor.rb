@@ -27,6 +27,12 @@ class BitmapEditor
         (upper_y..lower_y).map{ |elem| color_pixel(x, elem, color) }
       when 'C'
         @bitmap.map { |elem| elem.fill('O') }
+      when 'H'
+        left_x = to_coordinate(line[1])
+        right_x = to_coordinate(line[2])
+        y = to_coordinate(line[3])
+        color = line[4].to_s
+        (left_x..right_x).map{ |elem| color_pixel(elem, y, color) }
       when 'S'
         puts 'There is no image' if @bitmap.nil?
         puts @bitmap.map(&:join).join("\n")
