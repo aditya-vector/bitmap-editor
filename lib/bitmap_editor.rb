@@ -1,3 +1,4 @@
+require_relative 'bitmap'
 class BitmapEditor
 
   def initialize
@@ -11,44 +12,59 @@ class BitmapEditor
       line = line.chomp.split(" ")
       case line[0]
       when 'I'
-        height = line[1].to_i
-        width = line[2].to_i
-        @bitmap = Array.new(width) { Array.new(height, 'O')  }
+        generate_bitmap(line)
       when 'L'
-        x = to_coordinate(line[1])
-        y = to_coordinate(line[2])
-        color = line[3].to_s
-        color_pixel(x, y, color)
+        check_bitmap
+        color_pixel(line)
       when 'V'
-        x = to_coordinate(line[1])
-        upper_y = to_coordinate(line[2])
-        lower_y = to_coordinate(line[3])
-        color = line[4].to_s
-        (upper_y..lower_y).map{ |elem| color_pixel(x, elem, color) }
+        check_bitmap
+        draw_vertical_segment(line)
       when 'C'
-        @bitmap.map { |elem| elem.fill('O') }
+        check_bitmap
+        @bitmap.clear
       when 'H'
-        left_x = to_coordinate(line[1])
-        right_x = to_coordinate(line[2])
-        y = to_coordinate(line[3])
-        color = line[4].to_s
-        (left_x..right_x).map{ |elem| color_pixel(elem, y, color) }
+        draw_horizontal_segment(line)
       when 'S'
-        puts 'There is no image' if @bitmap.nil?
-        puts @bitmap.map(&:join).join("\n")
+        check_bitmap
+        @bitmap.print_map
       else
-          puts 'unrecognised command :('
+        puts 'unrecognised command :('
       end
     end
   end
 
   private
 
+  def check_bitmap
+    raise 'There is no image' if @bitmap.nil?
+  end
+
+  def draw_vertical_segment(line)
+    x = to_coordinate(line[1])
+    segment_range = (to_coordinate(line[2])..to_coordinate(line[3]))
+    color = line[4].to_s
+    @bitmap.draw_vertical_segment(segment_range, x, color)
+  end
+
+  def draw_horizontal_segment(line)
+    segment_range = (to_coordinate(line[1])..to_coordinate(line[2]))
+    y = to_coordinate(line[3])
+    color = line[4].to_s
+    @bitmap.draw_horizontal_segment(segment_range, y, color)
+  end
+
+  def generate_bitmap(line)
+    @bitmap = Bitmap.new(width: line[2].to_i, height: line[1].to_i)
+  end
+
   def to_coordinate(elem)
     elem.to_i - 1
   end
 
-  def color_pixel(x, y, color)
-    @bitmap[y][x] = color
+  def color_pixel(line)
+    x = to_coordinate(line[1])
+    y = to_coordinate(line[2])
+    color = line[3].to_s
+    @bitmap.color_pixel(x, y, color)
   end
 end

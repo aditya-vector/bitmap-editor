@@ -52,7 +52,7 @@ describe BitmapEditor do
       end
     end
 
-    describe 'Verify: V' do
+    describe 'Verify command: V' do
       context 'with valid arguments' do
         let(:file) { File.new('./examples/color_vertical_segment_bitmap.txt') }
         subject { BitmapEditor.new.run(file) }
@@ -70,7 +70,7 @@ describe BitmapEditor do
       end
     end
 
-    describe 'Verify: C' do
+    describe 'Verify command: C' do
       context 'with valid arguments' do
         let(:file) { File.new('./examples/clear_bitmap.txt') }
         subject { BitmapEditor.new.run(file) }
@@ -88,7 +88,7 @@ describe BitmapEditor do
       end
     end
 
-    describe 'Verify: H' do
+    describe 'Verify command: H' do
       context 'with valid arguments' do
         let(:file) { File.new('./examples/color_horizontal_segment_bitmap.txt') }
         subject { BitmapEditor.new.run(file) }
