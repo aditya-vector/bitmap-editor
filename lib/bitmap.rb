@@ -1,10 +1,13 @@
 class Bitmap
   def initialize(width:, height:)
     verify_default_bounds(width, height)
+    @width = width
+    @height = height
     @bitmap = Array.new(width) { Array.new(height, 'O')  }
   end
 
   def color_pixel(x, y, color)
+    verify_bitmap_bounds(x, y)
     @bitmap[y][x] = color
   end
 
@@ -29,5 +32,10 @@ class Bitmap
   def verify_default_bounds(width, height)
     return unless width > 250 || height > 250
     raise 'Arguments out of bound'
+  end
+
+  def verify_bitmap_bounds(width, height)
+    return unless width > @width || height > @height
+    raise 'Arguments out of bound for given bitmap'
   end
 end

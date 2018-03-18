@@ -15,4 +15,52 @@ describe BitmapEditor do
       end
     end
   end
+
+  describe '#color_pixel' do
+    let(:bitmap) { Bitmap.new(width: 4, height: 5) }
+    context 'when width is out of bitmap bounds' do
+      subject { bitmap.color_pixel(5, 3, 'Z') }
+      it 'should raise out of bounds error' do
+        expect { subject }.to raise_error('Arguments out of bound for given bitmap')
+      end
+    end
+    context 'when height is out of bitmap bounds' do
+      subject { bitmap.color_pixel(3, 7, 'Z') }
+      it 'should raise out of bounds error' do
+        expect { subject }.to raise_error('Arguments out of bound for given bitmap')
+      end
+    end
+  end
+
+  describe '#draw_vertical_segment' do
+    let(:bitmap) { Bitmap.new(width: 4, height: 5) }
+    context 'when width is out of bitmap bounds' do
+      subject { bitmap.draw_vertical_segment(5, 3, 'Z') }
+      it 'should raise out of bounds error' do
+        expect { subject }.to raise_error('Arguments out of bound for given bitmap')
+      end
+    end
+    context 'when height is out of bitmap bounds' do
+      subject { bitmap.draw_vertical_segment(3, 7, 'Z') }
+      it 'should raise out of bounds error' do
+        expect { subject }.to raise_error('Arguments out of bound for given bitmap')
+      end
+    end
+  end
+
+  describe '#draw_horizontal_segment' do
+    let(:bitmap) { Bitmap.new(width: 4, height: 5) }
+    context 'when width is out of bitmap bounds' do
+      subject { bitmap.draw_horizontal_segment(5, 3, 'Z') }
+      it 'should raise out of bounds error' do
+        expect { subject }.to raise_error('Arguments out of bound for given bitmap')
+      end
+    end
+    context 'when height is out of bitmap bounds' do
+      subject { bitmap.draw_horizontal_segment(3, 7, 'Z') }
+      it 'should raise out of bounds error' do
+        expect { subject }.to raise_error('Arguments out of bound for given bitmap')
+      end
+    end
+  end
 end
