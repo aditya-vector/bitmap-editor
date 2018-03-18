@@ -24,33 +24,23 @@ class BitmapEditor
 
   def draw_vertical_segment(line)
     check_bitmap
-    x = to_coordinate(line[1])
-    segment_range = (to_coordinate(line[2])..to_coordinate(line[3]))
-    color = line[4].to_s
-    @bitmap.draw_vertical_segment(segment_range, x, color)
+    x, segment_start, segment_end, color = line.drop(1)
+    @bitmap.draw_vertical_segment(segment_start, segment_end, x, color)
   end
 
   def draw_horizontal_segment(line)
     check_bitmap
-    segment_range = (to_coordinate(line[1])..to_coordinate(line[2]))
-    y = to_coordinate(line[3])
-    color = line[4].to_s
-    @bitmap.draw_horizontal_segment(segment_range, y, color)
+    segment_start, segment_end, y, color = line.drop(1)
+    @bitmap.draw_horizontal_segment(segment_start, segment_end, y, color)
   end
 
   def generate_bitmap(line)
-    @bitmap = Bitmap.new(width: line[2].to_i, height: line[1].to_i)
-  end
-
-  def to_coordinate(elem)
-    elem.to_i - 1
+    @bitmap = Bitmap.new(width: line[1].to_i, height: line[2].to_i)
   end
 
   def color_pixel(line)
     check_bitmap
-    x = to_coordinate(line[1])
-    y = to_coordinate(line[2])
-    color = line[3].to_s
+    x, y, color = line.drop(1)
     @bitmap.color_pixel(x, y, color)
   end
 
