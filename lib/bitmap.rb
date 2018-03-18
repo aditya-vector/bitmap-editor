@@ -1,5 +1,6 @@
 class Bitmap
   def initialize(width:, height:)
+    verify_default_bounds(width, height)
     @bitmap = Array.new(width) { Array.new(height, 'O')  }
   end
 
@@ -21,5 +22,12 @@ class Bitmap
 
   def clear
     @bitmap.map { |elem| elem.fill('O') }
+  end
+
+  private
+
+  def verify_default_bounds(width, height)
+    return unless width > 250 || height > 250
+    raise 'Arguments out of bound'
   end
 end
