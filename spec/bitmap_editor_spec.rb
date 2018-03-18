@@ -145,7 +145,7 @@ describe BitmapEditor do
 
     describe 'Verify command: S' do
       context 'when no bitmap is present' do
-        let(:file) { File.new('./examples/invalid/show.txt') }
+        let(:file) { File.new('./examples/show.txt') }
         subject { BitmapEditor.new.run(file) }
         it 'should raise an error' do
           expect { subject }.to raise_error('There is no image')
