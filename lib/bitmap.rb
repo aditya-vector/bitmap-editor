@@ -1,4 +1,3 @@
-require 'byebug'
 class Bitmap
   def initialize(width:, height:)
     @width = width
