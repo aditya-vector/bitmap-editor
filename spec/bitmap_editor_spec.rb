@@ -1,4 +1,5 @@
 require_relative '../lib/bitmap_editor'
+
 describe BitmapEditor do
   describe '#run' do
     describe 'Invalid Input File' do
