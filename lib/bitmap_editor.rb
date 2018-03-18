@@ -70,8 +70,9 @@ class BitmapEditor
       'L' => ->(line) { color_pixel(line) },
       'V' => ->(line) { draw_vertical_segment(line) },
       'H' => ->(line) { draw_horizontal_segment(line) },
-      'C' => ->(_) { clear_bitmap },
-      'S' => ->(_) { print_bitmap }
+      'C' => proc { clear_bitmap },
+      'S' => proc { print_bitmap }
     }
+    @instructions.default = proc { puts 'unrecognised command :(' }
   end
 end
