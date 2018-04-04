@@ -44,6 +44,11 @@ class BitmapEditor
     @bitmap.color_pixel(x, y, color)
   end
 
+  def fill_bitmap(line)
+    x, y, color = line.drop(1)
+    @bitmap.fill_bitmap(x, y, color)
+  end
+
   def clear_bitmap
     check_bitmap
     @bitmap.clear
@@ -61,7 +66,8 @@ class BitmapEditor
       'V' => ->(line) { draw_vertical_segment(line) },
       'H' => ->(line) { draw_horizontal_segment(line) },
       'C' => proc { clear_bitmap },
-      'S' => proc { print_bitmap }
+      'S' => proc { print_bitmap },
+      'F' => ->(line) { fill_bitmap(line) }
     }
     @instructions.default = proc { puts 'unrecognised command :(' }
   end
