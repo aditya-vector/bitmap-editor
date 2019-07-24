@@ -22,7 +22,7 @@ Command reference files can be found in `examples/valid` folder.
 - `ruby 2.3.4` (Can be downloaded from https://www.ruby-lang.org/en/downloads/ or with RVM https://rvm.io/)
 - `bundler` (run `gem install bundler` to get the latest version of bundler)
 
-## Running
+## Running:
 
 `>bin/bitmap_editor examples/show.txt`
 
