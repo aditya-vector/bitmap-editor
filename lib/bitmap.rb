@@ -1,3 +1,4 @@
+require 'pry'
 class Bitmap
   def initialize(width:, height:)
     @width = width
@@ -34,7 +35,7 @@ class Bitmap
     current_pixel_color = @bitmap[y][x]
     fill_array = [[x, y]]
     while coord = fill_array.shift
-      @bitmap[y][x] = color.to_s # TODO: Refactor
+      @bitmap[coord[1]][coord[0]] = color.to_s # TODO: Refactor
       adjacent_pixels =  get_adjacent_pixels(*coord) # get pixels adjacent to given pixel
       # Iterate and add correct adjacent pixels to fill_array
       adjacent_pixels.each do |coord|
@@ -48,7 +49,7 @@ class Bitmap
     [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]]
   end
 
-  def valid_fill_pixel?(width, height, current_pixel_color)
+  def valid_fill_pixel?(height, width, current_pixel_color)
     return false if (invalid_bounds?(width.to_i + 1, @width) || invalid_bounds?(height.to_i + 1, @height)) # TODO: refactor
     current_pixel_color == @bitmap[width][height]
   end
