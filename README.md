@@ -1,6 +1,6 @@
 # Bitmap editor
 
-## Background
+### Background
 
 A Ruby 2.3 program that simulates a basic interactive bitmap editor. Bitmaps are represented as an M x N matrix of pixels with each element representing a colour.
 
@@ -22,7 +22,7 @@ Command reference files can be found in `examples/valid` folder.
 - `ruby 2.3.4` (Can be downloaded from https://www.ruby-lang.org/en/downloads/ or with RVM https://rvm.io/)
 - `bundler` (run `gem install bundler` to get the latest version of bundler)
 
-## Running
+## Running:
 
 `>bin/bitmap_editor examples/show.txt`
 

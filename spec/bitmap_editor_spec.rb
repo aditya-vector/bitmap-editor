@@ -152,5 +152,23 @@ describe BitmapEditor do
         end
       end
     end
+
+    describe 'Verify command: F' do
+      context 'with valid arguments' do
+        let(:file) { File.new('./examples/valid/fill_bitmap.txt') }
+        subject { BitmapEditor.new.run(file) }
+        it 'fills the bitmap with given color till no other pixel color is found do' do
+          expect{ subject }.to output(
+            <<~STREND
+              OIZZ
+              OIZZ
+              OIZZ
+              OIZZ
+              OIZZ
+            STREND
+          ).to_stdout
+        end
+      end
+    end
   end
 end

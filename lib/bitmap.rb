@@ -1,3 +1,4 @@
+require 'pry'
 class Bitmap
   def initialize(width:, height:)
     @width = width
@@ -25,6 +26,32 @@ class Bitmap
   def draw_horizontal_segment(segment_start, segment_end, y, color)
     segment_range = segment_start..segment_end
     segment_range.map{ |elem| color_pixel(elem, y, color) }
+  end
+
+  def fill_bitmap(x, y, color)
+    verify_bitmap_bounds(x.to_i, y.to_i)
+    x = to_coordinate(x)
+    y = to_coordinate(y)
+    current_pixel_color = @bitmap[y][x]
+    fill_array = [[x, y]]
+    while coord = fill_array.shift
+      @bitmap[coord[1]][coord[0]] = color.to_s # TODO: Refactor
+      adjacent_pixels =  get_adjacent_pixels(*coord) # get pixels adjacent to given pixel
+      # Iterate and add correct adjacent pixels to fill_array
+      adjacent_pixels.each do |coord|
+        fill_array << coord if valid_fill_pixel?(*coord, current_pixel_color)
+      end
+      fill_array.uniq!
+    end
+  end
+
+  def get_adjacent_pixels(x, y)
+    [[x - 1, y], [x + 1, y], [x, y - 1], [x, y + 1]]
+  end
+
+  def valid_fill_pixel?(height, width, current_pixel_color)
+    return false if (invalid_bounds?(width.to_i + 1, @width) || invalid_bounds?(height.to_i + 1, @height)) # TODO: refactor
+    current_pixel_color == @bitmap[width][height]
   end
 
   def clear
